@@ -18,7 +18,10 @@ def prime_factors(num: int) -> list:
             factors.append(f)
             num = num // f
         else:
-            f += 1
+            if f >= 3:
+                f += 2
+            else:
+                f += 1
     return factors
 
 def is_prime(n):
