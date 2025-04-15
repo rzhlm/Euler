@@ -6,9 +6,14 @@
 
 # comes in at 62 seconds on my laptop, running on battery.
 # Should be <60s according to the rules
+# edit: after adding a 2-digit step in prime_factors: 36s
+# edit: counting instead of making a list makes no difference (count_primes)
+# edit: functools.cache neither
 
 from timer import timer
+import functools
 
+@functools.cache
 def prime_factors(num: int) -> list:
     """factorizes a number into a list of its prime factors"""
     factors = []
@@ -24,6 +29,7 @@ def prime_factors(num: int) -> list:
                 f += 1
     return factors
 
+@functools.cache
 def is_prime(n):
     return n == prime_factors(n)[0]
 
@@ -37,6 +43,19 @@ def find_primes(limit = 10):
             #print("new prime: ", i)
         i += 2
     return primes
+
+@functools.cache
+def count_primes(limit = 10):
+    """returns the limit-th prime"""
+    primes = [2, 3]
+    counter = 2
+    i = 5
+    while counter < limit:
+        if is_prime(i):
+            counter += 1
+            #print("new prime: ", i)
+        i += 2
+    return i-2
     
 
 def do():
@@ -49,7 +68,7 @@ def do():
 def main() -> None:
     #do()
     #print(find_primes(4)[-1])
-    answer = find_primes(10_001)[-1]
+    answer = count_primes(10_001)
     print(answer)
 
 if __name__ == "__main__":
