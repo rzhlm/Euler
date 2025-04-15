@@ -39,17 +39,12 @@ def calc_product(inputstr: str) -> int:
     return product
     
 def slide_window() -> int:
-    #iterations = (1000 // windowsize) + 1
     products = []
     i = 0
     end = 13
     while end < 1000:
-    #for i in range(iterations):
         end = i + 13
-        #print(f"{i=}")
-        #print(f"idx {0+i} to {13+i}")
         extract = NUMBER[0+i:13+i]
-        #print(extract)
         products.append(calc_product(extract))
         i += 1
     return max(products)
