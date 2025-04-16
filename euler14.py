@@ -3,6 +3,7 @@
 # Collatz sequence
 # which number (< 1M) produces the longest chain?
 #
+# ca 30s execution time on laptop (battery)
 
 from timer import timer
 
@@ -35,14 +36,14 @@ def go_len(n: int) -> int:
     return i
 
 def save_lengths(n:int) -> (int, int):
-    lengths = []
-    len_dict = {}
+    #lengths = []
+    #len_dict = {}
     maxkey = 0
     maxlen = 0
     
     for i in range(1, n):
         length = go_len(i)
-        len_dict[i] = length
+        #len_dict[i] = length
         if length > maxlen:
             maxlen = length
             maxkey = i
