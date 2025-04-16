@@ -50,8 +50,23 @@ def left_right() -> list:
             right += 1
     return max(products)
 
-def up_down():
-    pass
+def up_down() -> list:
+    # [0][0],[1][0], [2][0] etc
+    # [0][1],[1][1], [2][1], etc
+    # 
+    products = []
+    for x in range(0, 20):
+        top = 0
+        bottom = 4
+        while bottom <= 20:
+            window = [DATA[top][x], DATA[top+1][x], DATA[top+2][x], DATA[top+3][x] ]
+            print(window)
+
+            prod = math.prod(window)
+            products.append(prod)
+            top += 1
+            bottom += 1
+    return max(products)
 
 def topL_botR():
     pass
@@ -62,12 +77,14 @@ def botL_topR():
 
 def do():
     result = left_right()
-    print(result)
+    print("Left-Right: ", result)
+    result = up_down()
+    print("Up-Down: ", result)
     
 
 def main() -> None:
     do()
-    #print(DATA[0])
+    #print(DATA)
 
 if __name__ == "__main__":
     main()
