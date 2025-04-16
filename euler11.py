@@ -1,6 +1,9 @@
 # Euler 11
 #
+# find the maximum product of 4 adjacent numbers (cross & diagonal)
+# 
 from timer import timer
+import math
 
 DATA = [
 [ 8, 2,22,97,38,15, 0,40, 0,75, 4, 5, 7,78,52,12,50,77,91, 8],
@@ -25,10 +28,46 @@ DATA = [
 [ 1,70,54,71,83,51,54,69,16,92,33,48,61,43,52, 1,89,19,67,48],
 ]
 
+# dimensions 20x20
+# CROSS:
+#  sliding window: 20-4 = 16 slides horizontal & vertical
+
+def left_right() -> list:
+    """slides a window over the list, Left-Right, from top to bottom
+    return a list of the max product value
+
+     """
+    products = []
+    for y in range(0, 20):
+        left = 0
+        right = 4
+        while right <= 20:
+            window = DATA[y][left:right]
+            #print(window)
+            prod = math.prod(window)
+            products.append(prod)
+            left += 1
+            right += 1
+    return max(products)
+
+def up_down():
+    pass
+
+def topL_botR():
+    pass
+
+def botL_topR():
+    pass
+
+
+def do():
+    result = left_right()
+    print(result)
+    
 
 def main() -> None:
-    pass
-    print(DATA)
+    do()
+    #print(DATA[0])
 
 if __name__ == "__main__":
     main()
