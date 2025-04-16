@@ -19,7 +19,6 @@ def rec_triangular(n: int) -> int:
         return 1
     return n + rec_triangular(n-1)
 
-
 # should be slow, but is faster than the other solution
 # but still way too slow
 def find_factors(num: int) -> list:
@@ -27,6 +26,18 @@ def find_factors(num: int) -> list:
     for i in range(1, num+1):
         if num % i == 0:
             factors.append(i)
+    return factors
+
+def faster_factors(num: int) -> list:
+    # start by dividing instead of checking each value first
+    factors = []
+    f = 2    
+    while num > 1:
+        if num % f == 0:
+            factors.append(f)
+            num //= f
+        else:
+            f += 1
     return factors
 
 # other way: find prime factors, and then multiples of those
@@ -74,20 +85,22 @@ def other_fac_check(num, primes):
                 factors.append(n)
     return factors
     
-def go(num: int):
+def go(num=0):
     assert rec_triangular(7) == 28
     assert len(find_factors(28)) == 6
 
-    infinite_iter = count(start=7)
+    infinite_iter = count(start=2080)
 
     for i in infinite_iter:
         t = triangular(i)
         f = find_factors(t)
+        #f = faster_factors(t)
         l = len(f)
-        if l > 100:
+        if l > 350:
             print(f"{i=} {t=} {l=}")
             return
 
+# This is 4 times slower than the find_factors above:
 def go_num(n, logg=False):
     #t = rec_triangular(n)
     p = prime_factors(n)
@@ -98,44 +111,10 @@ def go_num(n, logg=False):
         print(f"and t has all factors: {o}")
     return o
 
-@timer(10)
-def bench_t():
-    sum = 0
-    for i in range(1, 1000):
-        sum += triangular(i)
 
-@timer(10)
-def bench_rec():
-    sum = 0
-    for i in range(1, 1000):
-        sum += rec_triangular(i)
-
-
-def test_primes():
-    f = prime_factors(20)
-    print(f)
-
-
-def solve():
-    for i in range(1, 1_000):
-        t = rec_triangular(i)
-        factors = go_num(t)
-        if len(factors) > 500:
-            print("FOUND: ",t)
-            return
 
 @timer()
 def main() -> None:
-    #go_until(10)
-    #print(go_num(10))
-    #print(other_fac_check(10, [2, 5]))
-    #print(other_factors(10, [2,5]))
-    #print(triangular(1_000))
-    #bench_t()
-    #bench_rec()
-    #go()
-    #test_primes()
-    #solve() # 40s
     go(1_000)
 
 if __name__ == "__main__":
