@@ -68,6 +68,9 @@ def up_down() -> list:
     return max(products)
 
 def topL_botR():
+    # TODO: bottom/right to be in func of top/left,
+    #  in order for collission detection to be automatic
+    # 
     # first horizontally
     # [0][0], [1][1], [2][2], etc
     # until
@@ -90,7 +93,30 @@ def topL_botR():
     return max(products)
 
 def botL_topR():
-    pass
+    # TODO: the bottom/right should be automatically be calculated in func of top/left
+    # and collission detection
+    # 
+    # first horizontally:
+    # [3][0],[2][1], [1][2], [0][3]
+    # to:
+    # [3][16], [2][17], [1][18], [0][19]
+    # and then step down vertically and iterate
+
+    products = []
+    for y in range(0,17):
+        top = left = 0
+        bottom = right = 3
+        while right <= 19 and bottom <= 19:
+            #print(f"{y=} {top=} {left=} {right=} {bottom=}")
+            window = [ DATA[y+3][left], DATA[y+2][left+1], DATA[y+1][left+2], DATA[y][left+3] ]
+            #print(window)
+            prod = math.prod(window)
+            products.append(prod)
+            top += 1
+            left += 1
+            bottom += 1
+            right += 1
+    return max(products)
 
 
 def do():
@@ -106,7 +132,12 @@ def do():
     result = topL_botR()
     products.append(result)
     print("TopL-BotR: ", result)
-    
+
+    result = botL_topR()
+    products.append(result)
+    print("BotL-TopR: ", result)
+
+    print("Max: ", max(products))
 
 def main() -> None:
     do()
