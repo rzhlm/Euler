@@ -60,8 +60,7 @@ def up_down() -> list:
         bottom = 4
         while bottom <= 20:
             window = [DATA[top][x], DATA[top+1][x], DATA[top+2][x], DATA[top+3][x] ]
-            print(window)
-
+            #print(window)
             prod = math.prod(window)
             products.append(prod)
             top += 1
@@ -69,17 +68,44 @@ def up_down() -> list:
     return max(products)
 
 def topL_botR():
-    pass
+    # first horizontally
+    # [0][0], [1][1], [2][2], etc
+    # until
+    # [0][17], [1][18], [2][19],
+    # and then vertically step down & iterate
+    products = []
+    for y in range(0, 17):
+        top = left = 0
+        bottom = right = 3
+        while right <= 19 or bottom <= 19:
+            #print(f"{y=} {top=} {left=} {right=} {bottom=}")
+            window = [ DATA[y][left], DATA[y+1][left+1], DATA[y+2][left+2], DATA[y+3][left+3]  ]
+            #print(window)
+            prod = math.prod(window)
+            products.append(prod)
+            top += 1
+            left += 1
+            bottom += 1
+            right += 1
+    return max(products)
 
 def botL_topR():
     pass
 
 
 def do():
+    products = []
     result = left_right()
+    products.append(result)
     print("Left-Right: ", result)
+    
     result = up_down()
+    products.append(result)
     print("Up-Down: ", result)
+
+    result = topL_botR()
+    products.append(result)
+    print("TopL-BotR: ", result)
     
 
 def main() -> None:
