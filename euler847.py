@@ -34,6 +34,13 @@ def R(n: int) -> int:
 
 def test():
     assert R(3) == 111
+    
+    # assert h(1,2,3) == 3
+    # assert h(2,3,3) == 4
+    # 
+    # assert H(6) == 204
+    # assert H(20) == 7_717
+    # assert H(R(3)) == 1_634_144
 
 def main() -> None:
     test()
