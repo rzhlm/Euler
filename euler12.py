@@ -11,6 +11,8 @@
 # 2.8s on laptop (battery), with recursion
 # 10 runs recusion: 3.9-4.0s
 # functional: 12-14s! surprising, I expected it to be faster
+# edit: functional running in Pypy (3.11): 0.22s
+
 
 from timer import timer
 import functools
@@ -48,7 +50,7 @@ def go():
 
     for i in infinite_iter:
         #t = rec_triangular(i)
-        t = functional_triangular(i)
+        t = rec_triangular(i)
         f = find_factors(t)
         l = len(f)
         if l > 500:
