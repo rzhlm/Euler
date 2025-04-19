@@ -4,6 +4,7 @@
 # which number (< 1M) produces the longest chain?
 #
 # ca 30s execution time on laptop (battery)
+# ca 0.29s under Pypy
 
 from timer import timer
 
