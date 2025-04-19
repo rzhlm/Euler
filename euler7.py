@@ -9,6 +9,8 @@
 # edit: after adding a 2-digit step in prime_factors: 36s
 # edit: counting instead of making a list makes no difference (count_primes)
 # edit: functools.cache neither
+# edit: after last optimisation: 36s 
+# edit within Pypy: <1.5s
 
 from timer import timer
 import functools
