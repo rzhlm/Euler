@@ -15,7 +15,7 @@ from timer import timer
 # functions
 
 def find_divisors(n: int) -> list[int]:
-    divisors = []
+    divisors: list[int] = []
     for i in range(1, int(n ** 0.5) + 1):
         if n % i == 0:
             divisors.append(i)
@@ -48,7 +48,7 @@ def sum_abundants() -> list[int]:
     # it gets 8, 16, 20, 22. This should not be possible.
     # where is the bug?
     abundants = list_all_abundants()
-    sum_ab = []
+    sum_ab: list[int] = []
     for ab in abundants:
         for ab2 in abundants:
             s = ab + ab2
@@ -66,7 +66,7 @@ def gen_all_nums() -> list[int]:
 
 def find_not_in_sums() -> list[int]:
     all = gen_all_nums()
-    not_abun = []
+    not_abun: list[int] = []
     s = sum_abundants()
     for num in all:
         if num not in s:
@@ -84,8 +84,8 @@ def test() -> None:
     assert sum(find_divisors(12)) == 16
     assert is_perfectnum(28)
     assert is_abundant(12)
-    assert ~is_abundant(10)
-    assert ~is_abundant(4)
+    assert not is_abundant(10)
+    assert not is_abundant(4)
     assert num_type(28) == 2
     assert num_type(12) == 3
 
