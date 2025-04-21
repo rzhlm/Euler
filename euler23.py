@@ -72,6 +72,7 @@ def find_not_in_sums() -> list[int]:
     for num in all:
         if num not in s:
             not_abun.append(num)
+    #return [num for num in all if num not in s]
     return not_abun
 
 ##############################################################################
