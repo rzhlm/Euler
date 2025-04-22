@@ -20,7 +20,7 @@ def find_divisors(n: int) -> list[int]:
         if n % i == 0:
             divisors.append(i)
             divisors.append(n//i) if i != 1 else None
-    return divisors
+    return list(set(divisors))
 
 def is_perfectnum(n: int) -> bool:
     return sum(find_divisors(n)) == n
