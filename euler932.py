@@ -15,9 +15,10 @@
 from timer import timer
 import time
 
-solutions = []
+#solutions = []
 
 def is_2025(n: int) -> bool:
+    #### probably a bug where abbb is not found (when it's not 2+2, but i.e. 1+3)
     n_str : str = str(n)
     if not (len(n_str) % 2 == 0):
         return False
@@ -73,17 +74,24 @@ def create_2025bis(n: int, start: int = 1) -> list[int]:
 
 
 def create_2025tris(n: int, start: int = 1) -> list[int]:
-    global solutions
-    half: int = n // 2
-    a_start: int = 10 ** (half - 1)
-    a_end: int = 10 ** (half) - 1
-    a_root_start: int = int(a_start ** 0.5) + 1
-    squares: list[int] = [i*i for i in range(a_root_start, a_end + 1)]
-    all_2025 = list(filter(is_2025, squares))
-    #print(all_2025)
-    solutions += all_2025
-    solutions = list(set(solutions))
-    return all_2025
+    steps = n // 2
+    #global solutions
+    local_solutions = []
+    for s in range(1, steps + 1):   
+        half: int = s
+        a_start: int = 10 ** (half - 1)
+        a_end: int = 10 ** (half) - 1
+        a_root_start: int = int(a_start ** 0.5) # + 1
+        squares: list[int] = [i*i for i in range(1, a_end + 1)]
+        all_2025 = list(filter(is_2025, squares))
+        #print(f"{s=} {all_2025=}")
+        #print(all_2025)
+        #solutions += all_2025
+        local_solutions += all_2025
+        #print(f"{s=} {all_2025=} {local_solutions=}")
+    #solutions = list(set(solutions))
+    local_solutions = list(set(local_solutions))
+    return local_solutions
         
         
 def T_func(n: int, start: int = 1) -> int:
@@ -113,7 +121,8 @@ def solve() -> None:
         result: int = T_func(i, 1)
         stop = time.time()
         print(f"{i=} {result=} {stop-start:.4f}s")
-
+    result = T_func(16)
+    print(f"final result: {result}")
 
 def testing() -> None:
     assert is_2025(2025)
@@ -125,19 +134,26 @@ def testing() -> None:
     assert T_func(4) == 5131
     assert create_2025(2) == [81]
     assert create_2025bis(2) == [81]
+    assert create_2025tris(2) == [81]
     assert create_2025(4) == [81, 2025, 3025]
     #assert create_2025bis(4) == [2025, 3025] # not correct, WIP
+    assert create_2025tris(2) == [81]
     assert create_2025tris(4) == [81, 2025, 3025]
+    assert create_2025tris(6) == [81, 2025, 3025, 494209]
+    assert create_2025tris(8) == create_2025tris(6) + [24502500, 25502500,
+         52881984, 60481729]
+    assert create_2025tris(10) == create_2025tris(8) + [6049417284, 6832014336]
 
 
 @timer()
 def main() -> None:
-    global solutions
+    #global solutions
     testing()
     solve()
-    solutions = list(set(solutions))
-    print(solutions)
-    print("SOLUTION: ", sum(solutions))
+    #solutions = list(set(solutions))
+    #print(solutions)
+    #print("SOLUTION: ", sum(solutions))
+    # add
 
 if __name__ == "__main__":
     main()
