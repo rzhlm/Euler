@@ -1,6 +1,6 @@
 Euler status
 
-21 problems done
+23 problems done
 
 top 10%: 27 problems done
 top 100_000: 34 problems done
@@ -40,3 +40,7 @@ top 10_000: 124 problems done
 0030
 ...
 0847		started
+...
+0932    solved
+...
+0938    solved
